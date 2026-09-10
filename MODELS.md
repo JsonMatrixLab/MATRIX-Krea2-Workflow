@@ -29,14 +29,9 @@ SAM is needed only when Eye Mask's `sam_refine` setting is enabled. The U2Net fi
 
 Detector weights are separate downloads and retain their source licenses and usage terms.
 
-## Optional LoRAs
+## User-added LoRAs
 
-Both rows are saved **OFF**. The workflow runs without them. CivitAI authentication is required to download them; use your own account and review the model-page permissions.
-
-| File and destination | Model page | Saved strength | SHA-256 | Notes |
-| --- | --- | ---: | --- | --- |
-| `models/loras/skindetails_krea2_loraholic.safetensors` | [Skin Detail Slider for Krea 2](https://civitai.com/models/2682644?modelVersionId=3097834) | 0.5 | `9c8537c435fade7e2251c817d5d66512af0203a1496161a4d9e65af05874148b` | Acquire directly from the creator's page and follow its usage and credit terms. |
-| `models/loras/RawGirlV2_epoch_10.safetensors` | [RawGirl Krea2 V2](https://civitai.com/models/2762732/rawgirl-krea2?modelVersionId=3112812) | 1.0 | `5f9f1144cfb7f963e91248dc1e1643a210a9940a7e9a73993c474abcffe80e81` | Use exact model version `3112812`; version `3156053` is RawGirl V3 and is not the configured file. Krea derivative terms also apply. |
+Release 1.0.1 contains no PowerLoraLoader rows and has no LoRA dependency. You may add your own compatible LoRAs later. Select and license them independently; this package does not prescribe, pin, download, hash, or validate any LoRA.
 
 ## Verify SHA-256
 

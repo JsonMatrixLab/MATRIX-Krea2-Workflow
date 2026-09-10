@@ -1,10 +1,10 @@
 Product: MATRIX Krea 2 Workflow V1
-Release: 1.0.0
+Release: 1.0.1
 Date: 2026-09-10
 Model path: Krea 2 Turbo FP8
 Canvas: ComfyUI Classic
-MATRIX-LAB-Nodes: 0.3.3
-MATRIX-LAB-Nodes commit: 8d07b22e61df53e82837f529736436a9cdc3991c
+MATRIX-LAB-Nodes: 0.3.4
+MATRIX-LAB-Nodes commit: 3f434be8706be318d03b693a3d54a19837e98616
 rgthree-comfy commit: 2c5342a8cb0eaecaabf61435a5f37dd594c510ba
 Repository: https://github.com/JsonMatrixLab/MATRIX-Krea2-Workflow
 Custom nodes: https://github.com/JsonMatrixLab/MATRIX-LAB-Nodes
