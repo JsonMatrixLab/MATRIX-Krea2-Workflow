@@ -1,6 +1,6 @@
 # Agent installation contract
 
-Use this document when an automation agent installs MATRIX Krea 2 Workflow V1 release `1.0.1` into a customer-controlled ComfyUI instance. Installation does not authorize publishing, account changes, provider calls, paid actions, image generation, or edits to the supplied prompt content.
+Use this document when an automation agent installs MATRIX Krea 2 Workflow V1 release `1.1.0` into a customer-controlled ComfyUI instance. Installation does not authorize publishing, account changes, provider calls, paid actions, image generation, or edits to the supplied prompt content.
 
 ## Exact release inputs
 
@@ -9,15 +9,17 @@ The release root must contain:
 ```text
 MATRIX-Krea2-V1.json
 API/MATRIX-Krea2-V1.api.json
-Custom-Nodes/MATRIX-LAB-Nodes-0.3.4.zip
+Custom-Nodes/MATRIX-LAB-Nodes-0.4.0.zip
 INSTALL.md
 MODELS.md
 ```
 
 Pin these sources exactly:
 
-- ComfyUI commit `12d5279438bfefc058a269eae805ceab6047777f`
-- MATRIX-LAB-Nodes version `0.3.4`, commit `3f434be8706be318d03b693a3d54a19837e98616`, repository `https://github.com/JsonMatrixLab/MATRIX-LAB-Nodes`
+- Verified GPU Pod boundary: ComfyUI 0.33.3, core commit
+  `4da9e2dbead52fc1e68beae33fe3d7ad63b63241`, frontend 1.49.6, PyTorch
+  2.8.0+cu128, and an RTX 5090. Preserve it during a node-only upgrade.
+- MATRIX-LAB-Nodes version `0.4.0`, commit `27c48f36b0ad871b301d9cb848c0f4484c2850f5`, repository `https://github.com/JsonMatrixLab/MATRIX-LAB-Nodes`
 - rgthree-comfy commit `2c5342a8cb0eaecaabf61435a5f37dd594c510ba`, repository `https://github.com/rgthree/rgthree-comfy`
 
 The workflow repository is `https://github.com/JsonMatrixLab/MATRIX-Krea2-Workflow`. If a repository cannot be read, report the exact URL and signed-in account state and ask the customer to provide access or the bundled release. Never place a token in a URL, command, script, log, image layer, workflow, or repository file.
@@ -41,23 +43,44 @@ The release contains no PowerLoraLoader rows and requires no LoRA files. A custo
 ## Procedure
 
 1. Resolve the active ComfyUI root and launcher Python from the customer's launcher or running process. Do not assume `/workspace/ComfyUI`.
-2. Record the current ComfyUI commit and custom-node state. If ComfyUI is not at the required commit, stop and report the mismatch before changing it.
+2. Record the current ComfyUI core, frontend, launcher, and custom-node state.
+   Preserve the verified Pod core. For any other host identity, report the difference
+   rather than changing ComfyUI core.
 3. Stop ComfyUI. Preserve existing workflows and custom nodes.
-4. Detect enabled folders for older `MATRIXLAB-Nodes` or `MATRIXLAB-UI-Nodes`. Report the class-ID conflict and request a recoverable disable or move plan; do not delete them.
-5. Extract `Custom-Nodes/MATRIX-LAB-Nodes-0.3.4.zip` into a clean staging directory. Copy its inner `MATRIX-LAB-Nodes` folder to `<ComfyUI>/custom_nodes/MATRIX-LAB-Nodes`. Reject an extra archive-wrapper directory. If the destination already exists, verify it is the identical package or stop and request a recoverable replacement plan; never merge different package versions.
+4. Detect `matrix-krea2-adapter`, older `MATRIXLAB-Nodes` or `MATRIXLAB-UI-Nodes`
+   split packs, and a standalone Metadata Killer. Report their backend/frontend
+   collisions. Preserve them and disable or move them recoverably only with the
+   user's case-specific authority; do not delete them or rewrite user workflows.
+5. Extract `Custom-Nodes/MATRIX-LAB-Nodes-0.4.0.zip` into a clean staging directory. Copy its inner `MATRIX-LAB-Nodes` folder to `<ComfyUI>/custom_nodes/MATRIX-LAB-Nodes`. Reject an extra archive-wrapper directory. If the destination already exists, verify it is the identical package or stop and request a recoverable replacement plan; never merge different package versions.
 6. Confirm that the installed MATRIX folder directly contains `__init__.py`, `MANIFEST.json`, `requirements.txt`, `_core`, `nodes`, and `web`.
-7. Read the installed `MANIFEST.json`. Require version `0.3.4` and exactly the 22 registrations listed below. A missing, extra, or renamed registration is a failed install.
+7. Read the installed `MANIFEST.json`. Require version `0.4.0` and exactly the 20 registrations listed below. A missing, extra, or renamed registration is a failed install.
 8. Install `requirements.txt` with the launcher Python, then install the three exact detector runtime packages above if the enabled stages require them.
 9. Install rgthree-comfy under `<ComfyUI>/custom_nodes/rgthree-comfy` and verify commit `2c5342a8cb0eaecaabf61435a5f37dd594c510ba`.
 10. Download the seven required weight files, create only their required destination directories, and verify every SHA-256 from [MODELS.md](MODELS.md).
 11. Start ComfyUI normally and inspect startup output for import or registration errors.
-12. Open `MATRIX-Krea2-V1.json` in the Classic canvas. The file under `API/` is the automation companion, not the editable canvas workflow.
-13. Confirm that the main manual CLIP prompt, Final Prompt, and character trigger are blank; the functional eye and skin prompts remain populated; and the Auto Prompter instructions/system content is present. Never fill or rewrite any prompt during installation.
-14. Stop before queueing. Require the user to enter their own non-empty main manual prompt before any image execution.
+12. Confirm from live node metadata that all 20 MATRIX IDs resolve to the unified
+    `MATRIX-LAB-Nodes` folder and exactly 14 unified frontend assets are served. Any
+    provider from an old adapter, split pack, or standalone saver is a failed install.
+13. Open `MATRIX-Krea2-V1.json` and the bundled V1 example in separate
+    Classic canvas copies. The file under `API/` is the automation companion, not the
+    editable canvas workflow. Confirm neither graph has missing nodes.
+14. Verify green MATRIX controls for both IDs in each pair: Spectral Sampler, AI
+    Influencer Resolution 2K/4K, Image Batch Loader, and Auto Prompter:
+    `MATRIXSpectralSampler` / `MATRIX_SpectralSampler`,
+    `MATRIXLAB_AIInfluencerResolution2K4K` /
+    `MATRIX_AIInfluencerResolution2K4K`, `MATRIXLAB_ImageBatchLoader` /
+    `MATRIX_ImageBatchLoader`, and `MATRIXLAB_PromptDirector` /
+    `MATRIX_AutoPrompter`. Do not save, migrate, or otherwise rewrite either
+    workflow.
+15. In the product workflow, confirm that the main manual CLIP prompt, Final Prompt,
+    and character trigger are blank; the functional eye and skin prompts remain
+    populated; and the Auto Prompter instructions/system content is present. Never
+    fill or rewrite any prompt during installation.
+16. Stop before queueing. Require the user to enter their own non-empty main manual prompt before any image execution.
 
 ## Required MATRIX manifest registrations
 
-The installed manifest must declare 22 registrations: 16 current nodes, two retained finishers, and four compatibility aliases.
+The installed manifest must declare 20 registrations: 16 current nodes and four compatibility aliases.
 
 Current registrations:
 
@@ -80,13 +103,6 @@ MATRIX_SkinMask
 MATRIX_SpectralSampler
 ```
 
-Retained finishers:
-
-```text
-MATRIX_CameraLook
-MATRIX_Renoise
-```
-
 Compatibility aliases:
 
 ```text
@@ -102,19 +118,31 @@ The saved prompt selector is **OFF / Manual**. The main manual prompt, Final Pro
 
 `MATRIX_AutoPrompter` is an optional reference branch. It contacts xAI only when a customer configures a credential and explicitly presses **Generate Prompt**. Installation does not authorize that action. Preserve its supplied instructions/system content unchanged.
 
-Static graph checks, hashes, node discovery, startup, and opening the canvas establish only their observed layers. They do not prove provider behavior, GPU or runtime compatibility, frontend persistence after reload, successful execution, performance, or image quality.
+Do not read, create, rotate, replace, or otherwise alter a provider key during
+installation or compatibility verification.
+
+The exact 1.1.0 release requires all 20 providers from one unified pack. Its verified
+Pod completed 2K with Photo Finisher ON, 2K with it OFF, and 4K with it ON. It also
+passed Classic save and fresh-browser reload with exact frontend/API graph equality.
+These checks used a standard manual prompt without a LoRA. The optional Auto Prompter
+provider action was not run, and Nodes 2.0 is not supported or verified.
 
 ## Completion report
 
 Report only observed state:
 
-- resolved ComfyUI root, launcher Python, and exact ComfyUI commit
-- MATRIX version and commit, rgthree commit, and the 22-name manifest comparison
+- resolved ComfyUI root, launcher Python, exact core commit, frontend version, and
+  which tested host boundary applies
+- MATRIX version and commit, rgthree commit, and the 20-name manifest comparison
 - installed model and detector paths with matching SHA-256 values
 - detector runtime package versions
-- startup/import/registration status and any missing runtime
-- workflow location and whether it opened in the Classic canvas
+- startup/import/registration status, all 20 provider paths, served unified asset
+  count, and any missing runtime
+- both workflow locations, missing-node results, and paired legacy/current green
+  frontend results in the Classic canvas
 - confirmation that the three user-content fields remained blank and no workflow was queued
 - any unavailable verification layer as `blocked`, not passed
 
-Do not claim provider, GPU, runtime, frontend-reload, execution, performance, or image-quality acceptance from installation checks. Do not upload customer images, workflows, credentials, or logs.
+Do not extend the recorded release boundary to a different provider, host, runtime,
+LoRA, Nodes 2.0, performance level, or aesthetic result from installation checks.
+Do not upload customer images, workflows, credentials, or logs.

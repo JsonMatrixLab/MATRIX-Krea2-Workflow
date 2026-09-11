@@ -1,10 +1,15 @@
 Product: MATRIX Krea 2 Workflow V1
-Release: 1.0.1
-Date: 2026-09-10
+Release: 1.1.0
+Date: 2026-09-11
 Model path: Krea 2 Turbo FP8
 Canvas: ComfyUI Classic
-MATRIX-LAB-Nodes: 0.3.4
-MATRIX-LAB-Nodes commit: 3f434be8706be318d03b693a3d54a19837e98616
+MATRIX-LAB-Nodes: 0.4.0
+MATRIX-LAB-Nodes commit: 27c48f36b0ad871b301d9cb848c0f4484c2850f5
+Existing GPU Pod: ComfyUI 0.33.3; core 4da9e2dbead52fc1e68beae33fe3d7ad63b63241; frontend 1.49.6
+GPU boundary: PyTorch 2.8.0+cu128; RTX 5090
+Verified: Classic save/fresh-browser reload/API equality; 2K Photo Finisher ON/OFF; 4K ON
+Test input: standard manual prompt; no LoRA; optional provider action not run
+Nodes 2.0: not supported or verified
 rgthree-comfy commit: 2c5342a8cb0eaecaabf61435a5f37dd594c510ba
 Repository: https://github.com/JsonMatrixLab/MATRIX-Krea2-Workflow
 Custom nodes: https://github.com/JsonMatrixLab/MATRIX-LAB-Nodes
