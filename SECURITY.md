@@ -8,4 +8,4 @@ Before sharing diagnostics, remove credentials, personal paths, prompt content, 
 
 Report security concerns through the support or reporting channel identified on the repository or download page available to you. If an issue tracker is accessible, use it only for non-sensitive reports. Repository visibility and access may change; this document does not promise a public tracker or private support channel.
 
-Workflow materials remain proprietary under [LICENSE](LICENSE). Bundled node source and external dependencies retain their own terms.
+Workflow materials are licensed under the Apache License 2.0 ([LICENSE](LICENSE), [NOTICE](NOTICE)). External dependencies retain their own terms.

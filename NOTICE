@@ -1,0 +1,13 @@
+MATRIX Krea 2 Workflow
+Copyright 2026 MATRIX LAB
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE).
+Earlier releases of this repository shipped with a proprietary LICENSE file;
+since 2026-09-29 those releases are also available under the Apache License, Version 2.0.
+This includes the bundled Custom-Nodes/MATRIX-LAB-Nodes-0.4.0.zip, whose inner LICENSE
+file predates this change.
+
+The names "MATRIX LAB" and "MATRIX Krea 2" and related logos are not licensed
+under the Apache License (see Section 6 of the license).
+
+External models and third-party nodes (for example rgthree-comfy) keep their own terms.

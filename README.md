@@ -88,4 +88,4 @@ Nodes 2.0 is not supported or verified for this release.
 
 ## Access and license
 
-Access depends on repository visibility and the GitHub account receiving the release. Workflow materials remain proprietary; see [LICENSE](LICENSE). Bundled node source retains its own license, and external models and rgthree retain their respective terms. See [SECURITY.md](SECURITY.md) before sharing diagnostics.
+Access depends on repository visibility and the GitHub account receiving the release. Workflow materials and the bundled MATRIX-LAB-Nodes archive are licensed under the [Apache License 2.0](LICENSE); see [NOTICE](NOTICE). The MATRIX LAB name and logos are not covered by the license. and external models and rgthree retain their respective terms. See [SECURITY.md](SECURITY.md) before sharing diagnostics.

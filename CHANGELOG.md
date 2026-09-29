@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased — license change — 2026-09-29
+
+- Relicense the workflow materials from proprietary terms to the Apache License 2.0 and add `NOTICE`.
+  Earlier releases, including the bundled MATRIX-LAB-Nodes 0.4.0 archive, are also available under Apache 2.0.
+
 ## 1.1.0 — 2026-09-11
 
 - Replace Camera Look and Renoise with one MATRIX Photo Finisher and one stage
